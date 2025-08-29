@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  users:
+    build: ./services/users
+    container_name: users
+    ports:
+      - "8001:8001"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  tasks:
+    build: ./services/tasks
+    container_name: tasks
+    ports:
+      - "8002:8002"
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  gateway:
+    build: ./gateway
+    container_name: gateway
+    depends_on:
+      - users
+      - tasks
+    ports:
+      - "${GATEWAY_PORT:-8080}:8080"
+    environment:
+      - USERS_SERVICE_URL=${USERS_SERVICE_URL:-http://users:8001}
+      - TASKS_SERVICE_URL=${TASKS_SERVICE_URL:-http://tasks:8002}
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+
+  ui:
+    build: ./ui
+    container_name: ui
+    depends_on:
+      - gateway
+    ports:
+      - "${STREAMLIT_PORT:-8501}:8501"
+    environment:
+      - GATEWAY_URL=http://gateway:8080
+      - STREAMLIT_SERVER_PORT=8501
+    restart: unless-stopped
