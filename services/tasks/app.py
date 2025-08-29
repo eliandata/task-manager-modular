@@ -29,7 +29,7 @@ class TaskOut(TaskIn):
 DB: Dict[str, TaskOut] = {}
 
 
-@app.get("/health") #comment
+@app.get("/health")
 def health():
     return {"status": "ok", "service": "tasks"}
 
