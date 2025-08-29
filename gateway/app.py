@@ -1,5 +1,4 @@
 import os
-
 import httpx
 from fastapi import FastAPI
 from fastapi import HTTPException

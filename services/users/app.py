@@ -1,8 +1,11 @@
 from typing import Dict, List
 from uuid import uuid4
 
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel, Field
+from fastapi import FastAPI
+from fastapi import HTTPException
+from pydantic import BaseModel
+from pydantic import Field
+
 
 app = FastAPI(title="Users Service", version="1.0.0")
 
