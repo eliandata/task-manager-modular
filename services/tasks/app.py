@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 
 app = FastAPI(title="Tasks Service", version="1.0.0")
 
+
 Status = Literal["todo", "in_progress", "done"]
 
 

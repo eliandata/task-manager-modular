@@ -5,6 +5,7 @@ import streamlit as st
 
 GATEWAY_URL = os.getenv("GATEWAY_URL", "http://localhost:8080").rstrip("/")
 
+
 st.set_page_config(page_title="Task Manager", page_icon="✅", layout="wide")
 st.title("Task Manager Dashboard")
 
