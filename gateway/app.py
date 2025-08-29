@@ -23,6 +23,7 @@ def health():
     return {"status": "ok", "service": "gateway"}
 
 
+# --- Users passthrough ---
 @app.post("/v1/users")
 async def create_user(request: Request):
     payload = await request.json()
@@ -40,6 +41,7 @@ async def list_users():
     return r.json()
 
 
+# --- Tasks passthrough ---
 @app.post("/v1/tasks")
 async def create_task(request: Request):
     payload = await request.json()
@@ -52,11 +54,12 @@ async def create_task(request: Request):
 
 @app.get("/v1/tasks")
 async def list_tasks(status: str | None = None, assignee_id: str | None = None):
-    params = {}
+    params: dict[str, str] = {}
     if status:
         params["status"] = status
     if assignee_id:
         params["assignee_id"] = assignee_id
+
     async with httpx.AsyncClient() as client:
         r = await client.get(f"{TASKS_URL}/v1/tasks", params=params, timeout=10)
     return r.json()
