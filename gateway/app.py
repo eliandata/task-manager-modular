@@ -15,6 +15,7 @@ app = FastAPI(title="Gateway", version="1.0.0")
 
 
 USERS_URL = os.getenv("USERS_SERVICE_URL", settings.users_service_url).rstrip("/")
+
 TASKS_URL = os.getenv("TASKS_SERVICE_URL", settings.tasks_service_url).rstrip("/")
 
 
