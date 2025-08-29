@@ -1,11 +1,14 @@
 import os
 
 import httpx
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI
+from fastapi import HTTPException
+from fastapi import Request
 from fastapi.responses import JSONResponse
 
 from shared.config import get_settings
 from shared.logging import setup_logger
+
 
 settings = get_settings()
 logger = setup_logger("gateway")
