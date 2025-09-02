@@ -1,8 +1,12 @@
 version: "3.9"
+
 services:
   users:
-    build: ./services/users
+    build:
+      context: .
+      dockerfile: services/users/Dockerfile
     container_name: users
+    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8001"]
     ports:
       - "8001:8001"
     environment:
@@ -10,8 +14,11 @@ services:
     restart: unless-stopped
 
   tasks:
-    build: ./services/tasks
+    build:
+      context: .
+      dockerfile: services/tasks/Dockerfile
     container_name: tasks
+    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8002"]
     ports:
       - "8002:8002"
     environment:
@@ -19,11 +26,14 @@ services:
     restart: unless-stopped
 
   gateway:
-    build: ./gateway
+    build:
+      context: .
+      dockerfile: gateway/Dockerfile
     container_name: gateway
     depends_on:
       - users
       - tasks
+    command: ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
     ports:
       - "${GATEWAY_PORT:-8080}:8080"
     environment:
@@ -33,10 +43,13 @@ services:
     restart: unless-stopped
 
   ui:
-    build: ./ui
+    build:
+      context: .
+      dockerfile: ui/Dockerfile
     container_name: ui
     depends_on:
       - gateway
+    command: ["streamlit", "run", "/app/streamlit_app/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
     ports:
       - "${STREAMLIT_PORT:-8501}:8501"
     environment:

@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.python-version
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Logs & cache
+*.log
+*.tmp
+tmp/
+.cache/
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Data / artifacts
+data/
+datasets/
+models/
+checkpoints/
+runs/
+outputs/
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.xlsx
+*.xls
+*.h5
+
+# Streamlit
+.streamlit/
+.streamlit_cache/
+
+# VS Code / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Docker
+**/.dockerignore
